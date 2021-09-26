@@ -1,24 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import Counter from './components/Counter';
+import { Provider } from './scratch-redux/Provider';
+import { countReducer } from './reducers/countReducer';
+import { createStore } from './scratch-redux/store';
+import { combineReducer } from './scratch-redux/combineReducer';
+
+const INITIAL_STATE = { counter: { count: 0 } }
 
 function App() {
+  const store = createStore(combineReducer({ counter: countReducer }), INITIAL_STATE)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}><Counter /></Provider>
   );
 }
 
