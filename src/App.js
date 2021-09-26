@@ -1,4 +1,3 @@
-import './App.css';
 import Counter from 'components/Counter';
 import { Provider } from 'scratch-redux';
 import { store } from 'store';
