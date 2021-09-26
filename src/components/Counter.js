@@ -1,8 +1,9 @@
 import React from 'react'
-import { connect } from 'scratch-redux/connect'
+import { connect } from 'scratch-redux'
 
 const Counter = (props) => {
   const { increase, decrease, count } = props
+
   return (
     <div>
       <span>{count}</span>
