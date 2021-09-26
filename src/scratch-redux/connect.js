@@ -1,16 +1,27 @@
 import { ReduxContext } from './Provider'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponent) => {
   const Connect = (props) => {
     const { store } = props
+    const ref = useRef(null)
     const [state, setState] = useState(store.getState())
-    console.log("connect rerendered")
+
     useEffect(() => {
-      store.subscribe((state) => {
+      const id = store.subscribe((state) => {
         console.log('call subscriber', state)
         setState(state)//to rerender only??
       })
+      ref.current = id
+
+      return () => {
+        const id = ref.current
+        if (id) {
+          store.unsubscribe(id)
+        } else {
+          console.error('Failed to unsubscribe')
+        }
+      }
     }, [])
 
     return (

@@ -1,21 +1,33 @@
+function getUniqueId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
 export const createStore = (reducer, initialState) => {
   const store = {};
   store.state = initialState;
   store.listeners = []; //listeners are an array of functions
 
-  //getState is a function
+  //get store value
   store.getState = () => store.state;
 
-  //subscribe is a function
+  //subscribe to the store
   store.subscribe = (listener) => {
-    store.listeners.push(listener);
+    const id = getUniqueId()
+    store.listeners.push({ id, listener });
+
+    return id
+  };
+
+  store.unsubscribe = (listenerId) => {
+    const newListenerList = store.listeners.filter(({ id }) => id === listenerId);
+    store.listeners = newListenerList
   };
 
   //dispatch is a function
   store.dispatch = (action) => {
     console.log({ listeners: store.listeners })
     store.state = reducer(store.state, action);
-    store.listeners.forEach(listener => listener(store.getState()));
+    store.listeners.forEach(({ listener }) => listener(store.getState()));
   };
 
   return store;
