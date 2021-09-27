@@ -5,10 +5,13 @@ const Counter = (props) => {
   const { increase, decrease, count } = props
 
   return (
-    <div>
-      <span>{count}</span>
-      <button onClick={increase}>+</button>
-      <button onClick={decrease}>-</button>
+    <div className="container">
+      <h1>Counter</h1>
+      <div className="flex-center">
+        <button className="counter-button" onClick={decrease}>-</button>
+        <span>{count}</span>
+        <button className="counter-button" onClick={increase}>+</button>
+      </div>
     </div>
   )
 }

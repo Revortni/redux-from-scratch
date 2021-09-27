@@ -5,7 +5,9 @@ import { store } from 'store';
 function App() {
 
   return (
-    <Provider store={store}><Counter /></Provider>
+    <Provider store={store}>
+      <Counter />
+    </Provider>
   );
 }
 
