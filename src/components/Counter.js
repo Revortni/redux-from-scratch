@@ -17,7 +17,7 @@ const Counter = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("mapState", state)
+
   return {
     count: state.counter.count
   }

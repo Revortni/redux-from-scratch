@@ -19,13 +19,12 @@ export const createStore = (reducer, initialState) => {
   };
 
   store.unsubscribe = (listenerId) => {
-    const newListenerList = store.listeners.filter(({ id }) => id === listenerId);
+    const newListenerList = store.listeners.filter(({ id }) => id !== listenerId);
     store.listeners = newListenerList
   };
 
   //dispatch is a function
   store.dispatch = (action) => {
-    console.log({ listeners: store.listeners })
     store.state = reducer(store.state, action);
     store.listeners.forEach(({ listener }) => listener(store.getState()));
   };

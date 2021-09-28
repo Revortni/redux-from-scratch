@@ -23,6 +23,8 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponen
         }
       }
     }, [])
+    console.log("listener", { listener: store.listeners, reference: ref.current })
+
 
     return (
       <WrappedComponent
