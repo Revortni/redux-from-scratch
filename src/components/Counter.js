@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'scratch-redux'
 import { subFromCounter, addToCounter } from 'actions/counter'
 import { undo, redo } from 'actions/timeTravel'
+import { bindActionCreators } from 'scratch-redux/actionCreator'
 
 const Counter = (props) => {
   const { increase, decrease, count, undo, redo, canUndo, canRedo } = props
@@ -31,11 +32,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  increase: () => dispatch(addToCounter()),
-  decrease: () => dispatch(subFromCounter()),
-  undo: () => dispatch(undo()),
-  redo: () => dispatch(redo())
+const mapDispatchToProps = bindActionCreators({
+  increase: addToCounter,
+  decrease: subFromCounter,
+  undo: undo,
+  redo: redo
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)
