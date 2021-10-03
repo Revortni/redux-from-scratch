@@ -13,7 +13,7 @@ code {
 }
 
 .container {
-  width: 100px;
+  width: 150px;
   margin: 0 auto;
 }
 
@@ -25,4 +25,9 @@ code {
 
 .counter-button {
   margin: 0 16px;
+}
+
+.title {
+  text-align: center;
+  white-space: nowrap;
 }

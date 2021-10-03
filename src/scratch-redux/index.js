@@ -1,5 +1,5 @@
 export { connect } from "./connect"
 export { Provider } from "./Provider"
 export { createStore } from "./store"
-export { combineReducer } from "./combineReducer"
+export { combineReducer } from "./reducers"
 

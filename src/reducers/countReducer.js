@@ -1,12 +1,12 @@
-export function countReducer(state = {}, action) {
+import { CounterActions } from "actions/counter"
+import { createReducer } from "scratch-redux/reducers"
 
-  switch (action.type) {
-    case 'add':
-      return { ...state, count: state.count + 1 }
-    case 'sub':
-      return { ...state, count: state.count - 1 }
-    default:
-      return state
+
+export const countReducer = createReducer([], {
+  [CounterActions.ADD_TO_COUNTER]: (state, action) => {
+    return { ...state, count: state.count + 1 }
+  },
+  [CounterActions.SUB_FROM_COUNTER]: (state, action) => {
+    return { ...state, count: state.count - 1 }
   }
-
-}
+})

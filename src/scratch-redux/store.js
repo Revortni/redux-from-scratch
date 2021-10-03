@@ -26,6 +26,7 @@ export const createStore = (reducer, initialState) => {
   //dispatch is a function
   store.dispatch = (action) => {
     store.state = reducer(store.state, action);
+    console.log({ newState: { ...store.state }, action: action.type })
     store.listeners.forEach(({ listener }) => listener(store.getState()));
   };
 
