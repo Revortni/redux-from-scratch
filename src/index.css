@@ -22,6 +22,11 @@ button {
   border: none;
 }
 
+button:disabled {
+  color: gray;
+  background-color: #2a2a2a;
+}
+
 .round {
   border-radius: 50%;
 }
