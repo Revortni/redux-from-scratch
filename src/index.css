@@ -5,11 +5,57 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #3a3a3a;
+  color: azure;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  background-color: #1a1a1a;
+  color: azure;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.tab__button {
+  background-color: #1a1a1a;
+  color: azure;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.tab__button:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.tab__button:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.tab__button--selected {
+  border: 1px solid azure;
+  transition: 0.6s border ease-in;
+}
+
+.tab__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab__button-container {
+  margin: 16px 0;
+  display: inline-flex;
+  border-radius: 8px;
 }
 
 .container {
@@ -25,6 +71,7 @@ code {
 
 .counter-button {
   margin: 0 16px;
+  font-weight: 600;
 }
 
 .title {
