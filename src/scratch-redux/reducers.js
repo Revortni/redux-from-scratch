@@ -9,3 +9,12 @@ export function combineReducer(reducerMap) {
     }, {})
   }
 }
+
+export function createReducer(initialState, handler) {
+  return (state = initialState, action) => {
+    if (Object.prototype.hasOwnProperty.call(handler, action.type)) {
+      return handler[action.type](state, action)
+    }
+    return state
+  }
+}

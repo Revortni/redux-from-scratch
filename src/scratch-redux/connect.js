@@ -9,7 +9,6 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponen
 
     useEffect(() => {
       const id = store.subscribe((state) => {
-        console.log('call subscriber', state)
         setState(state)//to rerender only??
       })
       ref.current = id
@@ -23,7 +22,6 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponen
         }
       }
     }, [])
-    console.log("listener", { listener: store.listeners, reference: ref.current })
 
 
     return (

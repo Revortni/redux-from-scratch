@@ -1,31 +1,23 @@
 import React from 'react'
-import { connect } from 'scratch-redux'
 
 const Counter = (props) => {
-  const { increase, decrease, count } = props
+  const { state: { count, canUndo, canRedo }, actions: { increase, decrease, undo, redo, } } = props
 
   return (
     <div className="container">
-      <h1>Counter</h1>
+      <h1 className='title'>Counter</h1>
       <div className="flex-center">
         <button className="counter-button" onClick={decrease}>-</button>
         <span>{count}</span>
         <button className="counter-button" onClick={increase}>+</button>
       </div>
+      <div className="flex-center">
+        <button className="counter-button" disabled={!canUndo} onClick={undo}>&lt;</button>
+        <h2 className='title'>Time travel</h2>
+        <button className="counter-button" disabled={!canRedo} onClick={redo}>&gt;</button>
+      </div>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-
-  return {
-    count: state.counter.count
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  increase: () => dispatch({ type: 'add' }),
-  decrease: () => dispatch({ type: 'sub' })
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+export default Counter
