@@ -8,8 +8,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-            - v1-dependencies-
-      - run:
-          npm install
-          npm run test
+            - dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - run: npm run test        
+      - save_cache:
+          paths:
+            - "dependencies"
+          key: dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
