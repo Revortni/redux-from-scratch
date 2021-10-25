@@ -11,6 +11,12 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
+      - run:
+          name: Log current branch and code files
+          command: |
+            echo current branch: {{ .Branch }} \n
+            echo listing files
+            ls -al
       - save_cache:
           paths:
             - node_modules
