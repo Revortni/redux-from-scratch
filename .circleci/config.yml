@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:14.18.1
-    working_directory: /app
     steps:
       - checkout
       - restore_cache:
@@ -14,7 +13,7 @@ jobs:
           command: npm install
       - save_cache:
           paths:
-            - "app"
+            - ~/usr/local/lib/node_modules 
           key: dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run: 
           name: Run tests
