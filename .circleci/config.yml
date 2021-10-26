@@ -19,27 +19,17 @@ jobs:
           paths:
             - node_modules
           key: dependencies-{{ checksum "package-lock.json" }}
-      # In the event the deployment has failed, send a notifications
-      - slack/notify:
-          event: "fail"
-          template: basic_fail_1
-      # When there is a successful deployment, send a notification
-      - slack/notify:
-          event: "pass"
-          template: success_tagged_deploy_1
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-  test:
-    docker:
-      - image: circleci/node:14.18.1
-    steps:
-      - attach_workspace:
-          at: .
       - run:
           name: Run tests
           command: npm run test
+      # In the event the deployment has failed, send a notifications
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      # When there is a successful deployment, send a notification
+      - slack/notify:
+          event: pass
+          template: basic_success_1
 
 workflows:
   version: 2
@@ -48,6 +38,3 @@ workflows:
       - build:
           context:
             - slack-secrets
-      - test:
-          requires:
-            - build
