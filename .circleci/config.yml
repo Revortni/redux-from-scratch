@@ -36,6 +36,3 @@ workflows:
             - slack-secrets
           requires:
             - test
-          filters:
-            tags:
-              only: /^v.*/
