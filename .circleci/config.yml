@@ -15,11 +15,11 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
-      # In the event the deployment has failed, send a notification for fail
+      # In the event the deployment has failed, send a notification
       - slack/notify:
           event: fail
           template: basic_fail_1
-      # When there is a successful deployment, send a notification for success
+      # When there is a successful deployment, send a notification
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
