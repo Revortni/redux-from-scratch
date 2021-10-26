@@ -1,6 +1,8 @@
 version: 2.1
 jobs:
   build:
+    context:
+      - slack-secrets
     docker:
       - image: circleci/node:14.18.1
     working_directory: ~/project
@@ -17,6 +19,7 @@ jobs:
           command: |
             echo listing files
             ls -al
+            echo $SLACK_DEFAULT_CHANNEL
       - save_cache:
           paths:
             - node_modules
@@ -39,15 +42,7 @@ workflows:
   version: 2
   build-test:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - main
+      - build
       - test:
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - main
