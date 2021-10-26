@@ -13,11 +13,9 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
-          name: Log current branch and code files
-          command: |
-            echo listing files
-            ls -al
-            echo $SLACK_DEFAULT_CHANNEL
+          name: Log secrets
+          command: echo $SLACK_DEFAULT_CHANNEL
+
       - save_cache:
           paths:
             - node_modules
