@@ -19,7 +19,7 @@ jobs:
           paths:
             - node_modules
           key: dependencies-{{ checksum "package-lock.json" }}
-      # In the event the deployment has failed, send a notification
+      # In the event the deployment has failed, send a notifications
       - slack/notify:
           event: fail
           template: basic_fail_1
