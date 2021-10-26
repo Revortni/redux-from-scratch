@@ -19,7 +19,7 @@ describe('tests for insertItem', () => {
       newValue: 3,
       atIndex: 2
     }
-    const expectedOutput = [1, 2]
+    const expectedOutput = [1, 2, 3]
     const output = insertItem(input.array, input.newValue, input.atIndex)
 
     expect(expectedOutput).toEqual(output)
