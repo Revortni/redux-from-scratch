@@ -1,53 +1,41 @@
 version: 2.1
 orbs:
   slack: circleci/slack@4.0
-
 jobs:
-  build:
+  # This "test" job will run on every commit (as per our workflow)
+  # We are ok with no notifications sent for this job.
+  test:
     docker:
-      - image: circleci/node:14.18.1
-    working_directory: ~/project
+      - image: cimg/base:stable
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - dependencies-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      # In the event the deployment has failed, send a notification
+      - run: echo "test my app"
+  # This "deploy" job will only run on a tagged commit (as per our workflow)
+  # We want to be alerted if this job fails and also when it succeeds.
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "deploy my app"
+      # In the event the deployment has failed, alert the engineering team
       - slack/notify:
           event: fail
           template: basic_fail_1
-      # When there is a successful deployment, send a notification
+          mentions: "@EngineeringTeam"
+      # When there is a successful deployment, send a notification with a different template.
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependencies-{{ checksum "package-lock.json" }}
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-  test:
-    docker:
-      - image: circleci/node:14.18.1
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Run tests
-          command: npm run test
-
 workflows:
-  version: 2
-  build-test:
+  test-and-deploy:
     jobs:
-      - build:
+      # We want the test job to run on all commits, so we will list it with no filters.
+      - test
+      # The deploy job will continue once the workflow has been manually approved.
+      - deploy:
           context:
             - slack-secrets
-      - test:
           requires:
-            - build
+            - test
+          filters:
+            tags:
+              only: /^v.*/
