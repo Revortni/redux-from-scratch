@@ -21,11 +21,11 @@ jobs:
           key: dependencies-{{ checksum "package-lock.json" }}
       # In the event the deployment has failed, send a notifications
       - slack/notify:
-          event: always
+          event: "fail"
           template: basic_fail_1
       # When there is a successful deployment, send a notification
       - slack/notify:
-          event: pass
+          event: "pass"
           template: success_tagged_deploy_1
       - persist_to_workspace:
           root: .
