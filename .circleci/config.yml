@@ -38,3 +38,7 @@ workflows:
       - build:
           context:
             - slack-secrets
+          filters:
+            branches:
+              only:
+                - main
