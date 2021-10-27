@@ -9,6 +9,9 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
+      - run:
+          name: logging branch
+          command: echo CIRCLE_BRANCH
       - restore_cache:
           keys:
             - dependencies-{{ checksum "package-lock.json" }}
