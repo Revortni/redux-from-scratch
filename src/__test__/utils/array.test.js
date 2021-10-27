@@ -12,6 +12,18 @@ describe('tests for insertItem', () => {
 
     expect(expectedOutput).toEqual(output)
   })
+
+  it("returns [1,2,3] when 3 is inserted at index greater than array length of [1,2]", () => {
+    const input = {
+      array: [1, 2],
+      newValue: 3,
+      atIndex: 2
+    }
+    const expectedOutput = [1, 2, 3]
+    const output = insertItem(input.array, input.newValue, input.atIndex)
+
+    expect(expectedOutput).toEqual(output)
+  })
 })
 
 
