@@ -62,7 +62,7 @@ describe('tests for removeItem', () => {
     expect(expectedOutput).toEqual(output)
   })
 
-  it("returns [1,2,3,5] when element at index 3 if removed from [1,2,3,4,5]", () => {
+  it("returns [1,2,3,5] when element at index -2 if removed from [1,2,3,4,5]", () => {
     const input = {
       array: [1, 2, 3, 4, 5],
       atIndex: -2
